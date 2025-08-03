@@ -30,17 +30,41 @@ async def load_image_from(uploaded_file: UploadFile = File(...)):
     try:
         image = Image.open(uploaded_file.file)
         text = pytesseract.image_to_string(image)
-
+        # this prompt gets all of the resume and evalueates the user
         response = model.generate_content(
             f"""
-        You are an expert technical evaluator. Analyze the following resume text provided in the variable {text}. Your tasks are:
-	1.	Identify the candidate’s strong suits - list technical skills, projects, tools, and domains where the candidate shows depth.
-	2.	Evaluate the candidate’s readiness for today’s software industry - check if their knowledge aligns with modern software development trends and tools.
-	3.	Determine the most relevant areas for assessment - suggest topics and skill areas that should be tested in a quiz to evaluate this candidate further for software jobs.
-	4.	Indicate the appropriate level of quiz complexity - beginner, intermediate, or advanced - based on their current profile.
-        """
+
+
+            You are a highly skilled technical evaluator and career assessment expert. Your tasks are:
+
+            1. Analyze the following resume text provided in the variable {text}.
+            2. Identify the candidate’s strong suits – list technical skills, projects, tools, and domains where the candidate shows depth.
+            3. Evaluate the candidate’s readiness for today’s software industry – check if their knowledge aligns with modern software development trends and tools.
+            4. Determine the most relevant areas for assessment – suggest topics and skill areas that should be tested in a quiz to evaluate this candidate further for software jobs.
+
+            Based on the analysis, and considering the job role the candidate wants to pursue, also generate a quiz preparation plan tailored to the candidate:
+            5. Include the topics to be tested in the quiz and the difficulty level of the quiz.
+            6. Only include topics that are directly relevant to the user’s desired job role and not already deeply mastered by the user.
+            7. Use the resume’s suggested quiz level as a starting point, but feel free to raise or lower the level based on the complexity of the target job.
+            8. Focus on topics that will help bridge the gap between the user’s current skills and the job requirements.
+            9. Include reasoning that clearly shows how your choice of topics and level matches the candidate’s needs.
+
+            Give your response in the following JSON format (do not add anything outside this JSON structure):
+
+            {{
+            "strong_suits": ["<skill_1>", "<skill_2>", "..."],
+            "projects": ["<project_1>", "<project_2>", "..."],
+            "industry_readiness": "<short assessment>",
+            "assessment_areas": ["<area_1>", "<area_2>", "..."],
+            "final_quiz_topics": ["<topic_1>", "<topic_2>", "..."],
+            "quiz_level": "beginner | intermediate | advanced",
+            "reasoning": "<clear justification for selected topics and level>"
+            }}
+            """
         )
+
         return {"analysis": response.text}
+
     except Exception as e:
         raise HTTPException(
             status_code=400,
