@@ -1,3 +1,9 @@
+import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+
 from fastapi import APIRouter, Request
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils import (
@@ -7,6 +13,9 @@ from utils import (
     give_user_authtoken,
 )
 from models import CreateUser
+
+
+load_dotenv()  # this is done do load all the .env variables from youre env file
 
 
 auth_router = APIRouter()
