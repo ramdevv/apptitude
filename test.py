@@ -1,33 +1,12 @@
-import pytesseract
-from PIL import Image
+import json
 
-# Optional: Set path to Tesseract if not in system PATH (Mac Homebrew example)
-# pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+test = '```json\n{\n  "strong_suits": [\n    "Python/Flask Full-Stack Development",\n    "Containerization (Docker, Docker Compose)",\n    "AI API Integration (Gemini API, OCR, Text Summarization)",\n    "NoSQL Database Management (MongoDB)",\n    "RESTful API Development Concepts",\n    "Project-based Software Implementation"\n  ],\n  "projects": [\n    "Student Competency Calculator",\n    "ScriptScribe"\n  ],\n  "industry_readiness": "Garvit demonstrates good readiness for entry-level to junior software development roles, particularly in full-stack or backend positions. Their practical experience with modern tools like Flask, Docker, and AI APIs is a significant asset for an undergraduate. The explicit mention of \'containerized deployment\' aligns with current industry trends. The focus on real-world problem-solving in projects is also positive.",\n  "assessment_areas": [\n    "Core Python (advanced concepts, OOP)",\n    "SQL and Relational Database Design",\n    "Advanced Flask framework concepts and best practices",\n    "Web Application Security Fundamentals",\n    "Deeper understanding of RESTful API design principles",\n    "Containerization best practices and orchestration (Docker/Docker Compose)",\n    "Basic Data Structures & Algorithms",\n    "Testing methodologies (Unit, Integration)"\n  ],\n  "final_quiz_topics": [\n    "Python Advanced Concepts & Object-Oriented Programming (OOP)",\n    "SQL & Relational Database Design (Normalization, Joins, Indexing)",\n    "RESTful API Design Principles & Best Practices (HTTP Methods, Status Codes, Statelessness, Idempotency)",\n    "Docker & Docker Compose (Dockerfile optimization, Networking, Volume Management, Orchestration)",\n    "Web Application Security Fundamentals (Common vulnerabilities and mitigation)",\n    "Basic Data Structures & Algorithms (Arrays, Hash Maps, Stacks, Queues, Sorting/Searching)"\n  ],\n  "quiz_level": "intermediate",\n  "reasoning": "The candidate has a solid practical foundation in full-stack development using Python/Flask, demonstrating the ability to build functional applications and utilize modern tools like Docker and AI APIs. The \'intermediate\' level is chosen because they\'ve moved beyond basic scripting and show competency in project execution. The selected quiz topics aim to: \\n\\n1.  **Deepen Existing Strengths**: Assessing advanced Python/OOP and Docker knowledge will ensure they understand the \'why\' behind their implementations and can write more robust, maintainable code. \\n2.  **Bridge Key Gaps**: While MongoDB is used, SQL and relational databases are fundamental in most software roles, making it a critical area to test. Similarly, basic Data Structures & Algorithms are crucial for problem-solving and are standard for any software engineering role but not explicitly demonstrated on the resume. \\n3.  **Enhance Industry Readiness**: A focus on RESTful API design best practices and web application security fundamentals will ensure they can build not just functional, but also secure and scalable applications, aligning with professional software development standards. These topics are directly relevant to a general \'Software Developer\' role, particularly backend or full-stack, and will help the candidate solidify their foundational knowledge for future growth."\n}\n```'
 
-# Image file path
-image_path = "/Users/garvit/Desktop/Screenshot 2025-07-31 at 2.48.01 PM.png"
+# Step 1: Clean the triple backticks and 'json' tag
+cleaned = test.replace("```json\n", "").replace("```", "")
 
-# Output text file path
-output_file_path = "/Users/garvit/Desktop/extracted_text.txt"
+# Step 2: Parse JSON string
+parsed = json.loads(cleaned)
 
-# Open the image using Pillow
-try:
-    img = Image.open(image_path)
-except FileNotFoundError:
-    print(f"Error: Image file not found at {image_path}")
-    exit()
-
-# Extract text using Tesseract OCR
-text = pytesseract.image_to_string(img)
-
-# Print extracted text to console
-print("Extracted Text:\n")
-print(text)
-
-# Save the extracted text to a file
-try:
-    with open(output_file_path, "w", encoding="utf-8") as f:
-        f.write(text)
-    print(f"\nText successfully extracted and saved to: {output_file_path}")
-except IOError:
-    print(f"Error: Could not write to file {output_file_path}")
+# Step 3: Use the parsed data
+print(parsed)
