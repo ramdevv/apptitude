@@ -1,9 +1,10 @@
 import pytesseract
 import os
 from PIL import Image
-from fastapi import APIRouter, File, UploadFile, HTTPException
+from fastapi import APIRouter, File, UploadFile, HTTPException, Request
 import google.generativeai as genai
 from dotenv import load_dotenv
+from fastapi_cache import FastAPICache
 
 resume_handling = APIRouter()
 
@@ -18,7 +19,7 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 
 
 @resume_handling.post("/upload")
-async def load_image_from(uploaded_file: UploadFile = File(...)):
+async def load_image_from(request: Request, uploaded_file: UploadFile = File(...)):
     print(f"uploaded filename: {uploaded_file.filename}")
     print(f" content type : {uploaded_file.content_type}")
     allowed_file_types = ["image/png", "image/jpeg", "image/jpg"]
@@ -28,6 +29,7 @@ async def load_image_from(uploaded_file: UploadFile = File(...)):
             detail="invalid file type. please give the input in the requested file type",
         )
     try:
+
         image = Image.open(uploaded_file.file)
         text = pytesseract.image_to_string(image)
         # this prompt gets all of the resume and evalueates the user
@@ -42,7 +44,7 @@ async def load_image_from(uploaded_file: UploadFile = File(...)):
             3. Evaluate the candidate’s readiness for today’s software industry – check if their knowledge aligns with modern software development trends and tools.
             4. Determine the most relevant areas for assessment – suggest topics and skill areas that should be tested in a quiz to evaluate this candidate further for software jobs.
 
-            Based on the analysis, and considering the job role the candidate wants to pursue, also generate a quiz preparation plan tailored to the candidate:
+            Based on the analysis, and considering the job role the candidate wants to pursue which is , also generate a quiz preparation plan tailored to the candidate:
             5. Include the topics to be tested in the quiz and the difficulty level of the quiz.
             6. Only include topics that are directly relevant to the user’s desired job role and not already deeply mastered by the user.
             7. Use the resume’s suggested quiz level as a starting point, but feel free to raise or lower the level based on the complexity of the target job.
@@ -62,6 +64,9 @@ async def load_image_from(uploaded_file: UploadFile = File(...)):
             }}
             """
         )
+        redis = FastAPICache.get_backend().redis
+        await redis.set("key", response.text, ex=300)
+        value = await redis.get("key")
 
         return {"analysis": response.text}
 
