@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import auth, resume, questions
+from routes import auth, resume, questions, rag
 from utils import CreateUser
 from app_cache import init_redis_cache
 from contextlib import asynccontextmanager
@@ -20,3 +20,4 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(auth.auth_router, prefix="/auth")
 app.include_router(resume.resume_handling, prefix="/resume")
 app.include_router(questions.questions_router, prefix="/questions")
+app.include_router(rag.rag_router, prefix="/rag")
