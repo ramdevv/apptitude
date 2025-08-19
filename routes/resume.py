@@ -1,10 +1,13 @@
 import pytesseract
 import os
+import json
 from PIL import Image
 from fastapi import APIRouter, File, UploadFile, HTTPException, Request
 import google.generativeai as genai
 from dotenv import load_dotenv
-from fastapi_cache import FastAPICache
+
+
+import uuid
 
 resume_handling = APIRouter()
 
@@ -32,6 +35,11 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
 
         image = Image.open(uploaded_file.file)
         text = pytesseract.image_to_string(image)
+
+        # to make a randome id for the user
+        user_id = str(uuid.uuid4())  # this would generate the randome id
+        # print(user_id)
+
         # this prompt gets all of the resume and evalueates the user
         response = model.generate_content(
             f"""
@@ -64,9 +72,11 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
             }}
             """
         )
-        redis = FastAPICache.get_backend().redis
-        await redis.set("key", response.text, ex=300)
-        value = await redis.get("key")
+        # make a json and write the resume content into it
+        data_to_store = {"resume_content_raw": response.text}
+        file_path = "routes/storage.json"
+        with open(file_path, "w") as json_file:
+            json.dump(data_to_store, json_file, indent=4)
 
         return {"analysis": response.text}
 
