@@ -13,6 +13,9 @@ from typing_extensions import List, TypedDict
 from pydantic import BaseModel
 import google.generativeai as genai
 import os
+import inspect
+import json
+
 
 load_dotenv()
 
@@ -51,11 +54,21 @@ async def data_to_chunks(input_data: text_input):
     for making the docume i have to get all the data which i have to get from the redis cache 
 
     """
+
+    # Get absolute path of storage.json (relative to project root)
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    storage_file = os.path.join(BASE_DIR, "storage.json")
+
+    # Load JSON content
+    with open(storage_file, "r") as f:
+        storage_data = json.load(f)
+
+    # Example: access a key "text" in storage.json
+    resume_text = storage_data.get("resume_content_raw")
+    print(resume_text)
+    """
     # first to retrive the user id of the currnet user
-    redis = FastAPICache.get_backend().redis
-    user_id = await redis.get("current user_id")
-    if user_id:
-        resume_text = await redis.get(f"user:{user_id}resume_raw_text")
+
     # print (resume_text)
     # to make a document object of the reusume_text
     doc1 = Document(
@@ -68,11 +81,13 @@ async def data_to_chunks(input_data: text_input):
     # print(all_splits)
     # now that we have divided this into chunks we can
     _ = vector_stores.add_documents(document=all_splits)
+    """
 
     """
     -> vector_store is the db which saves all the vectore embeddings 
     -> add_documents is the function which converts youre chunks into vectore embeddings 
 
+    """
     """
     retrieved_docs = vector_stores.similarity_search(
         user_question
@@ -81,18 +96,5 @@ async def data_to_chunks(input_data: text_input):
 
     # the final prompt will contain the context and the user questoin
 
-    final_prompt = f"""
-You are an AI assistant. Answer the following question using only the context below.
-If the answer is not in the context, say "I don't know."
-
-Context:
-{context_text}
-
-Question:
-{user_question}
-
-Answer:
-"""
-    response = model.generate_content(final_prompt)
-
-    return {"the response to youre question with context is:": response}
+  
+    """
