@@ -6,6 +6,9 @@ from fastapi import APIRouter, File, UploadFile, HTTPException, Request
 import google.generativeai as genai
 from dotenv import load_dotenv
 
+from utils import get_current_user
+import random
+
 
 import uuid
 
@@ -35,10 +38,14 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
 
         image = Image.open(uploaded_file.file)
         text = pytesseract.image_to_string(image)
+        data = {"text": text}
+        raw_text = json.dumps(data)
 
-        # to make a randome id for the user
-        user_id = str(uuid.uuid4())  # this would generate the randome id
-        # print(user_id)
+        # to insert the raw_text into the knowledge base
+        # insert_to_knowledge_base()
+        # to get the current user
+        current_user = get_current_user
+        print(current_user(request))
 
         # this prompt gets all of the resume and evalueates the user
         response = model.generate_content(
@@ -72,11 +79,6 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
             }}
             """
         )
-        # make a json and write the resume content into it
-        data_to_store = {"resume_content_raw": response.text}
-        file_path = "routes/storage.json"
-        with open(file_path, "w") as json_file:
-            json.dump(data_to_store, json_file, indent=4)
 
         return {"analysis": response.text}
 

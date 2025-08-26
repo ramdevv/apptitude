@@ -1,21 +1,25 @@
 import os
 import smtplib
+import jwt
+import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 
-from fastapi import APIRouter, Request
+
+from fastapi import APIRouter, Request, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils import (
     register_user,
     get_hashed_password,
     check_user_by_email,
-    give_user_authtoken,
 )
+
 from models import CreateUser
 
 
 load_dotenv()  # this is done do load all the .env variables from youre env file
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 auth_router = APIRouter()
@@ -31,7 +35,7 @@ def register_new_user(users: CreateUser):
     if check_user_by_email(email):
         return {"error", "there is already a username with the entered email"}
     else:
-        print("there is some one who is same ")
+        print("there is some one who is the same ")
 
         hashed_password = generate_password_hash(
             user_password, method="pbkdf2:sha256", salt_length=16
@@ -52,14 +56,32 @@ def register_new_user(users: CreateUser):
 
 
 @auth_router.post("/login")
-def login_user(users: CreateUser):
+def login_user(users: CreateUser, response: Response):
     # take the input of the user
     name = users.name
     email = users.email
     password = users.password  # this is the users password
-    # to get the users hashed password if there is any
-    if check_user_by_email(email):
-        hashed_pasword = get_hashed_password(email)
-        return give_user_authtoken(name)
-    else:
-        return {"error", "there is no use for this email "}
+    result = check_user_by_email(email)
+    if result:
+        hashed_password = get_hashed_password(email)
+        if not check_password_hash(hashed_password, password):
+            return {"error": "the password is invalid"}
+        # writing the jwt when the user is authenticated
+        payload = {
+            "id": result["id"],
+            "name": result["name"],
+            "exp": datetime.datetime.now(datetime.timezone.utc)
+            + datetime.timedelta(hours=2),
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+        response.set_cookie(
+            key="access_token",
+            value=token,
+            httponly=True,
+            max_age=7200,
+            expires=7200,
+            samesite="lax",
+            secure=True,
+        )
+        return {"message": " the user has logged in succesfully"}
+    return {"error": " the user was not found"}
