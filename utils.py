@@ -102,20 +102,19 @@ def register_user(name: str, email: str, hashed_password: str):
 # function to write to fill all the content of the knowledge base base for the user
 
 
-def insert_into_knowledge_base(raw_text: str, email: str):
+def insert_into_knowledge_base(raw_text: str, user_id: int):
     with connection.cursor() as cur:
-        # to get the user from the username
-        cur.execute("SELECT id FROM users WHERE email = %s ", (email,))
-        user = cur.fetchone()
-        if not user:
-            raise Exception(" the user does not exist in the user table")
-        user_id = user[0]
-        # now that we have the id in which a user has beed inserted in the system then we can inset the raw text for rag implimentation
-        cur.execute(
-            "INSERT INTO knowledge_base (data, user_id) VALUES (%s, %s)",
-            (raw_text, user_id),
-        )
-        connection.commit()
+        try:
+            cur.execute(
+                "INSERT INTO knowledge_base (data, user_id) VALUES (%s, %s)",
+                (raw_text, user_id),
+            )
+            connection.commit()
+        except Exception as e:
+            connection.rollback()  # this is done to fix the error " the current transaction is aborted"
+            raise Exception(
+                f"there is an error inserting the error in the knowledge_base: {e}"
+            )
 
 
 def get_current_user(request: Request):
@@ -130,3 +129,15 @@ def get_current_user(request: Request):
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail=" invalid token")
     return playload
+
+
+def get_data_from_knowledge_base(user_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                "SELECT data FROM knowledge_base WHERE user_id = %s;", (user_id,)
+            )
+            rows = cur.fetchall()  # fetch all rows for that user_id
+            return [row[0] for row in rows]  # extract only the 'data' values
+        except Exception as e:
+            raise Exception(f"error fetching the data from the knowledge_base: {e}")

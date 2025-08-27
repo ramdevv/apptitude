@@ -1,12 +1,14 @@
 import pytesseract
 import os
 import json
+import psycopg2
 from PIL import Image
-from fastapi import APIRouter, File, UploadFile, HTTPException, Request
+from fastapi import APIRouter, File, UploadFile, HTTPException, Request, status
 import google.generativeai as genai
+from psycopg2 import Error as Psycopg2Error
 from dotenv import load_dotenv
 
-from utils import get_current_user
+from utils import get_current_user, insert_into_knowledge_base
 import random
 
 
@@ -42,10 +44,26 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
         raw_text = json.dumps(data)
 
         # to insert the raw_text into the knowledge base
-        # insert_to_knowledge_base()
         # to get the current user
-        current_user = get_current_user
-        print(current_user(request))
+        current_user = get_current_user(request)
+        current_user_id = current_user["id"]
+        print("till this is ok")
+        # to insert into the knowledge_base
+        try:
+            insert_into_knowledge_base(raw_text, current_user_id)
+
+        except Psycopg2Error as db_error:
+            # this is for all the db related errors
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f" databse error:{str(db_error)}",
+            )
+        except Exception as e:
+            # this is for any other exception which is unexpected
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"there is some error inserting the reusme:{str(e)}",
+            )
 
         # this prompt gets all of the resume and evalueates the user
         response = model.generate_content(
@@ -80,7 +98,10 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
             """
         )
 
-        return {"analysis": response.text}
+        return {
+            "message": " the raw text has been added into the knowledge_base",
+            "analysis": response.text,
+        }
 
     except Exception as e:
         raise HTTPException(
