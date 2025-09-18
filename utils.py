@@ -1,5 +1,5 @@
 # writing all the crud functions which would be imported
-from db import connection
+from db import connection, vector_connection
 from fastapi import Request, Depends, HTTPException
 from dotenv import load_dotenv
 import json
