@@ -50,7 +50,7 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
         print("till this is ok")
         # to insert into the knowledge_base
         try:
-            insert_into_knowledge_base(raw_text, current_user_id)
+            insert_into_knowledge_base(text, current_user_id)
 
         except Psycopg2Error as db_error:
             # this is for all the db related errors
@@ -100,7 +100,7 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
 
         return {
             "message": " the raw text has been added into the knowledge_base",
-            "analysis": response.text,
+            "analysis": response,
         }
 
     except Exception as e:

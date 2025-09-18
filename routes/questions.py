@@ -3,7 +3,6 @@ import os
 import json
 import google.generativeai as genai
 from dotenv import load_dotenv
-from fastapi_cache import FastAPICache
 
 
 load_dotenv()  # calling this to load all the variables in the env file
@@ -20,16 +19,10 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 # router to generate the question for the quiz
 @questions_router.post("/get_technical")
 async def get_technical_questions(request: Request):
-    redis = FastAPICache.get_backend().redis
-    value = await redis.get("key")
-    # now we have the value of all the analysis of the resume now we have to parse this for beter useage
 
-    # first we have to clean the data
-    cleaned = value.replace("```json\n", "").replace("```", "")
     # print(cleaned)
 
     # Step 2: Parse JSON string
-    parsed = json.loads(cleaned)
 
     # Step 3: Use the parsed data
     # print(parsed)
