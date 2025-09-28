@@ -18,9 +18,12 @@ export function useRequest({url, body}: RequestButtonProp){
         setloading(true);
         seterror(null);
         try{
-            const res = await axios.post(url, body);
-            setresponse(res.data);
-            setSuccesfull(true);  // this is when there is succes 
+            const res = await axios.post(url, body,{
+                withCredentials: true,                  //sends and recieves the jwt token from the frontend
+            });
+            if (res.status === 200){
+                setSuccesfull(true)                 // only when request is 200
+            };
             return res.data;
         }
         catch(error: any){
