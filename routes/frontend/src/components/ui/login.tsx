@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import React, { use, useState } from "react"
 import { useRequest } from "./request_button.tsx"
-import { Register } from "./register.tsx"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react"
 
@@ -31,22 +30,12 @@ export function Login() {
             "password":password
         }
     });
-
-    useEffect(() => {
-        if (request.succesfull === true){
-            console.log("the login is succesfull");
-            navigate("/UploadResume");
-
-        }else{
-            console.log("login is not succesfull");
-        }
-    })
-
+    
     // handling the response of the request
     const handleResponse = async (e: React.FormEvent) => {
         e.preventDefault();  // this prevents the page to defalut reload 
         try{
-            const res = await request.sendRequest();
+            await request.sendRequest();
         } 
         catch(error){
             console.log("message: ", error);
@@ -54,6 +43,18 @@ export function Login() {
 
 
     }
+
+
+    useEffect(() => {
+        if (request.succesfull){
+            navigate("/UploadResume")
+
+        }else if (request.succesfull === false){
+            console.log("login is not succesfull");
+        }
+    }, [request.succesfull]);
+
+    
 
 // to edit the component and take the input and keep them in the usestate variables that we have made 
 return (

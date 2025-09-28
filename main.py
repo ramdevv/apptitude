@@ -20,7 +20,7 @@ app = FastAPI(lifespan=lifespan)
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for testing; use ["http://127.0.0.1:5500"] in prod
+    allow_origins=["http://localhost:3000"],  # for testing; use
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

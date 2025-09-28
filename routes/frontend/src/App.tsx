@@ -18,9 +18,10 @@ export function App() {
         <Route path="/" element={<Login />} />
         <Route path = "/Register" element = {<Register />} />
         <Route path = "/UploadResume" element = {<UploadResume />} />
-        <Route path = "/UploadResume" element = {<MenubarDemo />} />
+        <Route path = "/menubar" element = {<MenubarDemo />} />
 
       </Routes>
+      
     </div>
   );
 }

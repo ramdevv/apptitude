@@ -81,7 +81,7 @@ def login_user(users: CreateUser, response: Response):
             max_age=7200,
             expires=7200,
             samesite="lax",
-            secure=True,
+            secure=False,
         )
         return {"message": " the user has logged in succesfully"}
     return {"error": " the user was not found"}
