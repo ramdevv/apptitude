@@ -72,38 +72,32 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
             )
 
         # this prompt gets all of the resume and evalueates the user
-        response = model.generate_content(
-            f"""
+        prompt = f"""
+        You are a highly skilled technical evaluator and career assessment expert. The candidate's target role is **Junior Python Backend Developer**.
 
+**TASK:** Analyze the candidate's resume (provided elsewhere) and generate a tailored quiz preparation plan.
 
-            You are a highly skilled technical evaluator and career assessment expert. Your tasks are:
+**INSTRUCTIONS:**
+1.  **Analyze Strengths & Projects:** Identify depth areas (Python frameworks, AI integration, Docker, MongoDB).
+2.  **Evaluate Readiness:** Assess alignment with modern production standards (e.g., CI/CD, robust security, relational databases).
+3.  **Determine Gaps:** Identify skills lacking depth for a production-ready Backend Developer (e.g., SQL, Cloud, Testing).
+4.  **Tailor Quiz:** Select **Intermediate** level topics that bridge these gaps. Only include topics not already deeply mastered by the candidate.
+5.  **quiz level** do not forget giving the quiz results in the response as it is very important 
 
-            1. Analyze the following resume text provided in the variable {text}.
-            2. Identify the candidate’s strong suits – list technical skills, projects, tools, and domains where the candidate shows depth.
-            3. Evaluate the candidate’s readiness for today’s software industry – check if their knowledge aligns with modern software development trends and tools.
-            4. Determine the most relevant areas for assessment – suggest topics and skill areas that should be tested in a quiz to evaluate this candidate further for software jobs.
+**CRITICAL FORMAT ENFORCEMENT:**
+Your entire response **MUST** strictly adhere to the JSON format provided below. **DO NOT** add any introductory text, concluding commentary, markdown formatting (like ```json), or any text outside of the JSON structure itself.
 
-            Based on the analysis, and considering the job role the candidate wants to pursue which is **[INSERT TARGET JOB ROLE HERE, e.g., 'Junior Python Backend Developer']**, also generate a quiz preparation plan tailored to the candidate:
-            5. Include the topics to be tested in the quiz and the difficulty level of the quiz.
-            6. Only include topics that are directly relevant to the user’s desired job role and not already deeply mastered by the user.
-            7. Use the resume’s suggested quiz level as a starting point, but feel free to raise or lower the level based on the complexity of the target job.
-            8. Focus on topics that will help bridge the gap between the user’s current skills and the job requirements.
-
-            **CRITICAL INSTRUCTION: Your entire response must be a single, well-formed JSON object. Do not add any text, markdown, or commentary outside of the JSON structure. If the analysis is long, ensure the JSON is not truncated. DO NOT use the JSON block formatting (```json...```).**
-
-            Give your response in the following JSON format:
-
-            {
-            "strong_suits": ["<skill_1>", "<skill_2>", "..."],
-            "projects": ["<project_1>", "<project_2>", "..."],
-            "industry_readiness": "<short assessment>",
-            "assessment_areas": ["<area_1>", "<area_2>", "..."],
-            "final_quiz_topics": ["<topic_1>", "<topic_2>", "..."],
-            "quiz_level": "beginner | intermediate | advanced",
-            "reasoning": "<clear justification for selected topics and level>"
-            }
-            """
-        )
+{{
+"strong_suits": ["<list all strong technical skills and tools>", "..."],
+"projects": ["<list all key projects>", "..."],
+"industry_readiness": "<short assessment, typically 2-3 sentences>",
+"assessment_areas": ["<list all high-level areas to test>", "..."],
+"final_quiz_topics": ["<list the specific, intermediate-level topics to be tested>", "..."],
+"quiz_level": "intermediate",
+"reasoning": "<clear justification for the selected topics, level, and how they bridge the candidate's skill gaps>"
+}}
+        """
+        response = model.generate_content(prompt)
         analysis_text = response.text
 
         return {

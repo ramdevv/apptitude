@@ -122,7 +122,6 @@ def get_current_user(request: Request):
     token = request.cookies.get("access_token")
     if not token:
         raise HTTPException(status_code=404, detail="not authenticated")
-    print("till this")
     try:
         playload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     except jwt.ExpiredSignatureError:
