@@ -30,9 +30,9 @@ export function UploadResume() {
         },
         withCredentials:true,
       })
-      
+      8
       console.log("upload succesfull", res.data);
-      setButtonText("go to the next page");
+      setButtonText("go to the next page")
 
       
       } catch(err){
