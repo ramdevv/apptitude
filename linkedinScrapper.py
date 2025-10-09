@@ -182,7 +182,7 @@ def clean_text(
 
 
 def scrap_url(url):
-    job_link_list = []
+
     response = requests.get(
         url,
         headers={
@@ -191,13 +191,13 @@ def scrap_url(url):
             " Version/15.3 Safari/605.1.15"
         },
     )
-    job_link_list = []
+    i = 1
+    all_jobs_data = []
     if response.status_code == 200:
         html_content = response.text
         soup = BeautifulSoup(html_content, "html.parser")
         job_postings = soup.find_all("div", class_="base-search-card")
 
-        job_link_list = []
         for job in job_postings:
             title_tag = job.find("h3", class_="base-search-card__title")
             title = title_tag.text.strip() if title_tag else ""
@@ -214,12 +214,38 @@ def scrap_url(url):
             job_sallary = job.find("span", class_="job-search-card__salary-info")
             sallary = job_sallary.text.strip() if job_sallary else "not listed"
 
+            has_verification = job.find("span", class_="verified-job-badge__icon")
+            has_verification = "Verified" if has_verification else "Not Verified"
+
+            experience_level_tag = job.find(
+                "span", class_="job-search-card__experience"
+            )
+            experience_level = (
+                experience_level_tag.text.strip()
+                if experience_level_tag
+                else "Not listed"
+            )
+
+            job_type_tag = job.find("span", class_="job-search-card__job-type")
+            job_type = job_type_tag.text.strip() if job_type_tag else "Not listed"
+
+            under10_applicants_tag = job.find(
+                "span", string=lambda t: t and "applicants" in t
+            )
+            under10_applicants = (
+                under10_applicants_tag.text.strip()
+                if under10_applicants_tag
+                else "Applicants info not listed"
+            )
+
+            remote_filter_tag = job.find("span", string=lambda t: t and "Remote" in t)
+            remote_filter = "Remote" if remote_filter_tag else "On-site/Not mentioned"
+
             job_link = job.find("a", class_="base-card__full-link")
             if job_link and job_link.has_attr("href"):
-                job_link_list.append(job_link["href"])
                 single_link = job_link["href"]
                 link_response = requests.get(single_link)
-                counter = 0
+
                 if link_response.status_code == 200:
                     link_html = link_response.text
                     link_soup = BeautifulSoup(link_html, "html.parser")
@@ -230,21 +256,35 @@ def scrap_url(url):
                         job_descriptoin = clean_text(
                             job_description_container.get_text(separator="/n")
                         )
-
-                        return job_descriptoin
+                        all_jobs_data.append(
+                            {
+                                "space": f"\n\n========JOB{i}========",
+                                "title": title,
+                                "company": companyName,
+                                "salary": sallary,
+                                "date_listed": listedDate,
+                                "job_benefits": job_benefits,
+                                "has_verification": has_verification,
+                                "experience_level": experience_level,
+                                "job_type": job_type,
+                                "under10_applicants": under10_applicants,
+                                "remote_filter": remote_filter,
+                                "job_description": job_descriptoin,
+                                "space": f"========JOB{i}=========\n\n",
+                            }
+                        )
+                        i = i + 1
 
                     else:
                         print("could not find the description of the container")
-                    job_soup = link_soup.prettify()
 
                 else:
                     print("we did not get any response from the link")
 
             else:
                 return "we could not append in the list"
-        # print(job_link_list)
 
-        return "scrapping done successfully"
+        return all_jobs_data
     else:
         return f"message {response.status_code}"
 
