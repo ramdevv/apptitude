@@ -110,6 +110,7 @@ def insert_into_knowledge_base(raw_text: str, user_id: int):
                 (raw_text, user_id),
             )
             connection.commit()
+            print("the data is inserted into the databse")
         except Exception as e:
             connection.rollback()  # this is done to fix the error " the current transaction is aborted"
             raise Exception(

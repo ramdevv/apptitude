@@ -1,144 +1,112 @@
-{
-    [
-        {
-            "space": "========JOB1=========\n\n",
-            "title": "Trabajador/a Social TELEASISTENCIA SAD",
-            "company": "Macrosad",
-            "salary": "not listed",
-            "date_listed": "",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": 'Descripción Nos encontramos en búsqueda de un/a trabajador/a social para coordinar el servicio de teleasistencia del servicio de ayuda a domicilio con residencia en Cantabria. La teleasistencia es un servicio, dirigido a personas mayores que viven solas o a personas con diversidad funcional, que permite pedir ayuda en caso de urgencia, desde el propio domicilio. Funciones principales Coordinación del servicio de ayuda a domicilio (SAD). Coordinación y apoyo en la gestión del servicio de teleasistencia. Contacto y seguimiento con usuarios/as y profesionales del servicio. Elaboración de informes y gestión administrativa vinculada al puesto. Se Ofrece: Contrato temporal 6 meses con opción a indefinido. Teletrabajo los primeros meses hasta que se realice la apertura de la oficina. Media jornada de 20h semanales. Horario intensivo de mañana L-V. Incorporación inmediata. Salario según Convenio de Discapacidad. "> Nos encontramos en búsqueda de un/a trabajador/a social para coordinar el servicio de teleasistencia del servicio de ayuda a domicilio con residencia en Cantabria. La teleasistencia es un servicio, dirigido a personas mayores que viven solas o a personas con diversidad funcional, que permite pedir ayuda en caso de urgencia, desde el propio domicilio. Funciones principales Coordinación del servicio de ayuda a domicilio (SAD). Coordinación y apoyo en la gestión del servicio de teleasistencia. Contacto y seguimiento con usuarios/as y profesionales del servicio. Elaboración de informes y gestión administrativa vinculada al puesto. Se Ofrece: Contrato temporal 6 meses con opción a indefinido. Teletrabajo los primeros meses hasta que se realice la apertura de la oficina. Media jornada de 20h semanales. Horario intensivo de mañana L-V. Incorporación inmediata. Salario según Convenio de Discapacidad. Requisitos mínimos Titulación universitaria en ámbito sanitario o social preferiblemente. Imprescindible estar empadronado/a en Cantabria (preferiblemente residir en Santander, por apertura de futura oficina). Permiso de conducir y vehículo propio. Certificado de discapacidad reconocido mínimo 33%. Estar inscrito/a como demandante de empleo. "> Titulación universitaria en ámbito sanitario o social preferiblemente. Imprescindible estar empadronado/a en Cantabria (preferiblemente residir en Santander, por apertura de futura oficina). Permiso de conducir y vehículo propio. Certificado de discapacidad reconocido mínimo 33%. Estar inscrito/a como demandante de empleo. Show more Show less',
-        },
-        {
-            "space": "========JOB2=========\n\n",
-            "title": "ISE Multichannel Supervisor",
-            "company": "Unilever",
-            "salary": "not listed",
-            "date_listed": "2 weeks ago",
-            "job_benefits": "Actively Hiring",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "Unilever está contratando: ISE Multichannel Coordinator Función: ISE Multichannel Coordinator Scope: LOCAL Localidad: Colombia Términos & Condiciones: Posición de tiempo completo ¿QUIÉNES SOMOS? ¿Quieres ser parte de una compañía que hace la diferencia alrededor del mundo? En Unilever, tenemos un propósito claro: hacer que la vida sostenible sea algo común. A través de nuestras 400 marcas que llegan a 2.5 mil millones de personas todos los días, nuestro objetivo es generar un impacto social positivo a nivel mundial y local. PROPÓSITO DE LA POSICIÓN Liderar, organizar, formar y administrar al equipo de gestores y mercaderistas en campo de la zona/región asignada. Garantizar una ejecución brillante de la estrategia comercial y promocional en los puntos de venta asignados, maximizando la visibilidad de nuestras marcas, categorías y segmentos en los que participamos. Fomentar la disponibilidad de producto mediante alertas tempranas al equipo comercial, generando impacto en las actividades del cliente y asegurando el cumplimiento de los acuerdos comerciales e indicadores clave (OSA, DEC, SOS). Apoyar dinámicas que impulsen el crecimiento del Sell Out. PRINCIPALES RESPONSABILIDADES Liderar y desarrollar al equipo de campo (gestores y mercaderistas). Asegurar la ejecución de la estrategia comercial y promocional en PDV del canal moderno. Maximizar visibilidad de marcas, categorías y segmentos. Generar alertas tempranas al equipo comercial sobre disponibilidad de producto. Coordinar cumplimiento de acuerdos comerciales e indicadores (OSA, DEC, SOS). Apoyar dinámicas que impulsen el crecimiento del Sell Out. ¿QUÉ NECESITAS PARA APLICAR A LA VACANTE? Experiencia y Conocimientos Experiencia liderando equipos en campo. Conocimiento de ejecución en punto de venta del canal moderno. Manejo de indicadores comerciales (OSA, DEC, SOS). Capacidad de análisis y toma de decisiones rápidas. Habilidades Liderazgo y formación de equipos. Comunicación efectiva y trabajo colaborativo. Orientación a resultados y mejora continua. Organización y enfoque operativo. LIDERAZGO Passion for High Performance Personal Mastery Purpose & Service Agility Business Acumen Unilever is an organisation committed to equity, inclusion and diversity to drive our business results and create a better future, every day, for our diverse employees, global consumers, partners, and communities. We believe a diverse workforce allows us to match our growth ambitions and drive inclusion across the business. At Unilever we are interested in every individual bringing their ‘Whole Self’ to work and this includes you! Thus if you require any support or access requirements, we encourage you to advise us at the time of your application so that we can support you through your recruitment journey. Show more Show less",
-        },
-        {
-            "space": "========JOB3=========\n\n",
-            "title": "Accounting Manager/ Controller",
-            "company": "Ottomatik.io",
-            "salary": "not listed",
-            "date_listed": "2 weeks ago",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "Hi there! We are South and our client is looking for an Accounting Manager/ Controller! Note to Applicants: Eligibility: This position is open to candidates residing in Latin America. Application Language: Please submit your CV in English. Applications submitted in other languages will not be considered. Professional Presentation: We encourage you to showcase your professional experience by including a Loom video in the application form. While this is optional, candidates who provide a video presentation will be given priority. We are seeking a detail-oriented and organized Accounting Manager to join our growing offshore team. The ideal candidate will oversee the full accounting cycle for multiple high-growth startup clients, manage month-end close and reconciliations, ensure GAAP-compliant financial reporting, and lead day-to-day client accounting operations including AP, AR, payroll, and revenue recognition. They will also guide and review the work of client teams, maintain consistent accounting policies, and partner closely with startup executives to provide financial insights and recommendations. Responsibilities Serve as the primary accounting lead and controller for 2–3 large, high-growth startup clients. Manage and review monthly close processes, including balance sheet and P&L reconciliations (prepaid expenses, fixed assets, accrued liabilities, deferred revenue, etc.). Oversee core accounting functions such as accounts payable, accounts receivable, payroll, inventory, and revenue recognition. Ensure the accuracy and timeliness of financial reporting, delivering GAAP-compliant financial statements and management reports. Partner directly with startup executive teams (CEOs, CFOs, VPs of Finance) to provide insights, recommendations, and proactive financial support. Maintain consistent accounting policies and procedures across clients, documenting best practices to ensure scalability and efficiency. Manage the day-to-day workflow of your dedicated client teams, reviewing their work and ensuring quality deliverables. Collaborate cross-functionally within Furey to continuously improve client processes and enhance service delivery. Qualifications Bachelor’s degree in Accounting, Finance, or related field (CPA or equivalent designation preferred). MBA would be a plus 15+ years of progressive accounting experience, ideally with exposure to high-growth startups, venture-backed companies, or outsourced accounting (at least 3 years of experience with an accounting firm is required) 5+ years experience in a manager position Fluency in English (written and verbal) required Strong understanding of U.S. GAAP and technical accounting concepts. Proven experience leading month-end close and producing accurate financial statements. Hands-on expertise with accounting systems (QuickBooks, NetSuite, or similar) and strong Excel/Google Sheets skills. Excellent organizational, prioritization, and project management skills with the ability to handle multiple clients simultaneously. Strong client relationship skills and ability to communicate effectively with startup executives. Experience in Inventory and Cost Accounting Nice to Haves Work experience at one of the big four US accounting firms (KPMG, PricewaterhouseCoopers, Deloitte, Ernst & Young) Ability to create or improve processes. We’re a fast paced start up and don’t always have lengthy process documentation available. What We Offer Competitive salary in USD Unlimited Paid Days Off + 14 paid federal holidays per calendar year Time zone & Working hours: Monday to Thursday 9 am - 6 pm, and Friday 9 am - 1 pm EST. If this opportunity sounds good to you, send us your resume in English! Show more Show less",
-        },
-        {
-            "space": "========JOB4=========\n\n",
-            "title": "Senior Accounting Manager",
-            "company": "Ottomatik.io",
-            "salary": "not listed",
-            "date_listed": "2 weeks ago",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "Hi there! We are South and our client is looking for a Senior Accounting Manager ! Note To Applicants Eligibility: This position is open to candidates residing in Latin America. Application Language: Please submit your CV in English. Applications submitted in other languages will not be considered. Professional Presentation: We encourage you to showcase your professional experience by including a Loom video in the application form. While this is optional, candidates who provide a video presentation will be given priority. Role Overview We are seeking a bilingual (Spanish/English) senior accounting professional to assist with accounting operations. This is a full-time role, initially on a month-to-month contract with the option to convert to permanent employment. Key Responsibilities Perform GAAP-compliant expense accruals, revenue recognition, and fixed assets for the monthly closing Perform revenue recognition, including revenue from student tuition and fees, service revenue collected from partner universities, income from rent and administrative services Perform expense and Accounts Payable accruals Perform account analysis and reconciliation; account reclassifications Identify system improvements and assist with process optimization initiatives Over time, assist with ERP data migration Report to the VP of Finance Candidate Requirements Accounting Manager / Controller level (CPA not required, strong GAAP knowledge mandatory) Bilingual in Spanish and English 10+ years of relevant experience Systems thinking and process improvement skills; Dynamics F&O knowledge a plus Strong communication and analytical skills If this opportunity sounds good to you, send us your resume! Show more Show less",
-        },
-        {
-            "space": "========JOB5=========\n\n",
-            "title": "Accounting Associate",
-            "company": "Ottomatik.io",
-            "salary": "not listed",
-            "date_listed": "2 weeks ago",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "Hi there! We are South and our client is looking for an Accounting Associate ! Note To Applicants Eligibility: This position is open to candidates residing in Latin America. Application Language: Please submit your CV in English. Applications submitted in other languages will not be considered. Professional Presentation: We encourage you to showcase your professional experience by including a Loom video in the application form. While this is optional, candidates who provide a video presentation will be given priority. About The Role We are seeking a detail-oriented and organized Accounting Associate to join our growing offshore team. The ideal candidate will assist in managing financial records, processing transactions, and supporting accounting functions to ensure smooth financial operations. Responsibilities Assist in the preparation of financial statements and reports Process accounts payable and accounts receivable transactions Reconcile key accounts, including bank statements, and ensure accuracy in financial records Support month-end and year-end closing procedures Maintain documentation and records for auditing and compliance purposes Work closely with the team to optimize accounting processes Assist in managing day-to-day client communications, responding to questions and information requests Requirements Bachelor’s degree in Accounting, Finance, or a related field Minimum of 2 years of accounting experience Proficiency in accounting software and Microsoft Excel Strong analytical and problem-solving skills Excellent attention to detail and organizational abilities Ability to work independently and manage multiple tasks Comfortable learning and navigating new systems and tools Strong communication skills with the ability to interact effectively with clients and other key stakeholders Certifications Strong preference would be a degree in Accounting, with Finance or related fields being secondary. If they have a degree in a related field, an accounting certification would be a plus Must Haves Full professional proficiency, both spoken and written. We work very closely with our offshore associates so it’s imperative to minimize communication issues 2 to 5 years of experience in an accounting or bookkeeping role, preferably with a US based company. This associate will be working on bank reconciliations, fixed assets, prepaid expenses, etc. so they should have experience preparing those types of reconciliations in a previous role Experience with Quickbooks Online (it’s not 100% must-have but is a very large bonus) Nice to Haves Work experience at one of the big four US accounting firms (KPMG, PricewaterhouseCoopers, Deloitte, Ernst & Young) Ability to create or improve processes. We’re a fast paced start up and don’t always have lengthy process documentation available. Experience in Netsuite, Bill.com and/or Ramp Show more Show less",
-        },
-        {
-            "space": "========JOB6=========\n\n",
-            "title": "COORDINADOR/A AYUDA DOMICILIO (CON DISCAPACIDAD)",
-            "company": "Macrosad",
-            "salary": "not listed",
-            "date_listed": "",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": 'Descripción Nos encontramos en búsqueda de Coordinador/a de ayuda a domicilio con residencia en Cantabria. Funciones principales Coordinación del servicio de ayuda a domicilio (SAD). Coordinación y apoyo en la gestión del servicio de teleasistencia. Contacto y seguimiento con usuarios/as y profesionales del servicio. Elaboración de informes y gestión administrativa vinculada al puesto. Se Ofrece: Contrato temporal 6 meses con opción a indefinido. Media jornada de 20h semanales. Horario intensivo de mañana L-V. Comienzo en teletrabajo. Incorporación inmediata. Salario según Convenio de Discapacidad: 726€ brutos mensuales en 14 pagas. "> Nos encontramos en búsqueda de Coordinador/a de ayuda a domicilio con residencia en Cantabria. Funciones principales Coordinación del servicio de ayuda a domicilio (SAD). Coordinación y apoyo en la gestión del servicio de teleasistencia. Contacto y seguimiento con usuarios/as y profesionales del servicio. Elaboración de informes y gestión administrativa vinculada al puesto. Se Ofrece: Contrato temporal 6 meses con opción a indefinido. Media jornada de 20h semanales. Horario intensivo de mañana L-V. Comienzo en teletrabajo. Incorporación inmediata. Salario según Convenio de Discapacidad: 726€ brutos mensuales en 14 pagas. Requisitos mínimos Titulación universitaria en ámbito sanitario o social preferiblemente. Imprescindible estar empadronado/a en Cantabria (preferiblemente residir en Santander, por apertura de futura oficina). Permiso de conducir y vehículo propio. Certificado de discapacidad reconocido mínimo 33%. Estar inscrito/a como demandante de empleo. "> Titulación universitaria en ámbito sanitario o social preferiblemente. Imprescindible estar empadronado/a en Cantabria (preferiblemente residir en Santander, por apertura de futura oficina). Permiso de conducir y vehículo propio. Certificado de discapacidad reconocido mínimo 33%. Estar inscrito/a como demandante de empleo. Show more Show less',
-        },
-        {
-            "space": "========JOB7=========\n\n",
-            "title": "Sr. Financial Analyst",
-            "company": "Ottomatik.io",
-            "salary": "not listed",
-            "date_listed": "1 week ago",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "Hi there! We are South and our client is looking for a Sr. Financial Analyst! Note To Applicants Eligibility: This position is open to candidates residing in Latin America. Application Language: Please submit your CV in English. Applications submitted in other languages will not be considered. Professional Presentation: We encourage you to showcase your professional experience by including a Loom video in the application form. While this is optional, candidates who provide a video presentation will be given priority. Our client is a growing boutique finance, accounting & strategy firm built to help startups scale efficiently and sustainably. We are looking for a Senior Financial Analyst to join our growing Financial Advisory practice. Ideal candidates are analytical, inquisitive, and enjoy diving into financial data to identify key performance drivers and fresh insights. This is a client-facing role and candidates should be confident participating in client discussions, and delivering and interpreting financial results. Candidates with early stage startup experience in accounting, finance, or FP&A roles are preferred, as are candidates with client-service experience and SaaS or CPG industry experience. What You’ll Do Develop assumptions-driven financial models that empower clients to forecast company performance, assess headcount and resource needs, manage runway, and plan for fundraising Prepare and present comprehensive monthly financial reports to multiple clients, including all financial statements, trend reporting, budget vs. actual reporting, and key metrics Build financial dashboards that use visualization to communicate results and tell a “story” Perform ad-hoc analysis for clients on pricing strategy, margin sensitivity, cash burn scenarios, etc. Ensure all forward-looking models and analysis is accessible and built with investors in mind Requirements Fully fluent English level Accounting or Finance graduate/Post Graduate 7+ years’ experience in financial planning, analysis, and reporting Strong analytical and advanced Excel skills as well as excellent written and verbal communication Comfortable in communicating with all levels of people in an organization, e.g., Manager/Controller/CFO’s/Business owners. If this opportunity sounds good to you, send us your resume in English! Show more Show less",
-        },
-        {
-            "space": "========JOB8=========\n\n",
-            "title": "Business Development Support Specialist",
-            "company": "Ottomatik.io",
-            "salary": "not listed",
-            "date_listed": "3 weeks ago",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "Hi there! We are South and our client is looking for a Business Development Support Specialist ! Note To Applicants Eligibility: This position is open to candidates residing in Latin America. Application Language: Please submit your CV in English. Applications submitted in other languages will not be considered. Professional Presentation: We encourage you to showcase your professional experience by including a Loom video in the application form. While this is optional, candidates who provide a video presentation will be given priority. About The Client Our client is a mission-driven agency partnering with organizations and making a positive impact on people’s lives (higher education, public transit and certain non-profits). Each project is unique, requiring creativity, adaptability, and a collaborative approach. The team values mentorship, growth, and storytelling to demonstrate value to clients. They focus on open-source (Drupal and WordPress) website strategy, redesigns, development, integrations and ongoing support. Role Overview The Business Development Support Specialist will assist the Director of Business Development with lead identification, proposal creation, deal management, and internal tracking. The role demands comfort in a fast-paced, sometimes ambiguous environment where priorities shift regularly based on lead viability and strategic priorities. Success is measured by the quality and efficiency of proposal creation rather than solely by winning bids. Key Responsibilities Handle inbound inquiries (via email) and research RFPs and lead targets. Draft, edit, and assemble proposals using existing materials, identifying where gaps need to be filled and thoughtful alignment of agency’s value to potential client’s stated and larger strategic goals. Track opportunities and proposals in JIRA and HubSpot. Collaborate with team members asynchronously and during critical East Coast hours (Mon, Tue, Fri). Apply AI tools to improve efficiency in proposal creation and opportunity identification. Ideal Candidate Qualities Quick-thinking, creative, and adaptable . Strong attention to detail (no spelling errors in names, accurate proposal content such as using “plugin” for WordPress and “module” for Drupal). Comfortable iterating and collaborating in a flexible work environment, while understanding the need to be available to support key deadlines. Strong writing and storytelling skills; able to organize content into cohesive proposals. Curious and proactive in identifying differentiators and opportunities. Willingness to learn and grow within the agency. Preferred Background/Skills: Experience in proposal writing, business development support, journalism, or technical project management. Familiarity CRM systems, proper formatting in Google Docs, and project tracking tools. Familiarity with AI tools is a nice-to-have, but not required. A willingness to learn within them, however, is encouraged. Ability to work asynchronously with team members in multiple time zones, while working closely with the Director of Business development during their workday Ability to manage multiple tasks independently. If this opportunity sounds good to you, send us your resume! Show more Show less",
-        },
-        {
-            "space": "========JOB9=========\n\n",
-            "title": "Product Manager (Senior/Lead) ID42374",
-            "company": "AgileEngine",
-            "salary": "not listed",
-            "date_listed": "5 days ago",
-            "job_benefits": "Be an early applicant",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "On-site/Not mentioned",
-            "job_description": "AgileEngine is an Inc. 5000 company that creates award-winning software for Fortune 500 brands and trailblazing startups across 17+ industries. We rank among the leaders in areas like application development and AI/ML, and our people-first culture has earned us multiple Best Place to Work awards. WHY JOIN US If you're looking for a place to grow, make an impact, and work with people who care, we'd love to meet you! ABOUT THE ROLE As a Product Manager , you’ll define strategy, lead teams, and deliver digital products that engage millions of users worldwide. Combining data-driven insights with market knowledge, you’ll shape product vision, mentor peers, and collaborate across functions. This role offers high impact, growth, and the chance to influence the future of digital media . WHAT YOU WILL DO - Product Strategy – Develop and communicate a clear product strategy and vision for IGN’s digital platforms and products, aligning it with the company’s goals and objectives - Product Leadership – Lead multiple product teams and drive product strategy for a larger portfolio of products. - Team Leadership – Lead and mentor a team of product managers, providing guidance and support to help them achieve their goals and deliver high-quality products. - Product Roadmap – Define and maintain the product roadmap for multiple products, ensuring it aligns with business priorities, user needs, and market trends. Make data-driven decisions and prioritize features accordingly. - Cross-Functional Collaboration – Collaborate with cross-functional teams, including engineering, design, editorial, and marketing, to ensure successful product development and delivery. - User Research – Conduct and analyze user research to gain a deep understanding of user needs, preferences, and pain points. Use this data to inform product decisions and improvements. - User Experience (UX) – Work with UX/UI designers to create user-friendly and visually appealing products. Ensure a seamless and engaging user experience across IGN’s digital platforms. - Data Analysis – Utilize data analytics and key performance indicators (KPIs) to monitor product performance, identify areas for improvement, and make data-driven decisions to optimize the product. - Product Development – Oversee the end-to-end product development process, from ideation to release. Coordinate with development teams to deliver high-quality products on schedule. - Project Management – Define and prioritize product features, enhancements, and requirements based on customer feedback, market research, and business impact. Collaborate with product managers to ensure that product feature prioritization aligns with the overall product strategy and roadmap. - Product Launch – Plan and execute successful product launches, including marketing strategies and user communication. Monitor product performance post-launch and iterate based on user feedback. - Stakeholder Communication – Keep stakeholders informed about the status of ongoing projects, milestones, and potential roadblocks. Maintain transparency and ensure alignment with business goals. - Market and Competitive Analysis – Stay informed about industry trends, emerging technologies, and the competitive landscape to identify opportunities and threats in the market. - User Feedback and Support – Engage with user feedback, reviews, and support channels to address user concerns, gather insights, and drive product improvements. MUST HAVES - 5-7 years working on technology-powered products as either a product manager or user researcher; - Strong understanding of digital media platforms, technologies, and industry trends ; - Proven ability of build intuitive content management systems that meet both internal and external customer needs; - Experience in building subscription based products with a track record of driving growth; - Led product development on complex features from 1st to Nth interaction; - A history of deep and demonstrated understanding of the techniques and methods of modern product discovery and product delivery; - Demonstrated ability to figure out solutions to hard problems with many constraints, using sound judgment to assess risks, and to lay out your argument in a well-structured, data-informed, written narrative; - Proven ability to engage with engineers, designers, and company leaders in a constructive and collaborative relationship; - Bachelor’s degree or equivalent practical experience; - Upper-Intermediate English level. NICE TO HAVES - Deep understanding of gaming trends; - Strong background in app development and design. PERKS AND BENEFITS - Professional growth: Accelerate your professional journey with mentorship, TechTalks, and personalized growth roadmaps. - Competitive compensation: We match your ever-growing skills, talent, and contributions with competitive USD-based compensation and budgets for education, fitness, and team activities. - A selection of exciting projects: Join projects with modern solutions development and top-tier clients that include Fortune 500 enterprises and leading product brands. - Flextime: Tailor your schedule for an optimal work-life balance, by having the options of working from home and going to the office – whatever makes you the happiest and most productive. Show more Show less",
-        },
-        {
-            "space": "========JOB10=========\n\n",
-            "title": "Accountant - Remote - Colombia",
-            "company": "FullStack Labs",
-            "salary": "not listed",
-            "date_listed": "2 weeks ago",
-            "job_benefits": "Actively Hiring",
-            "has_verification": "Not Verified",
-            "experience_level": "Not listed",
-            "job_type": "Not listed",
-            "under10_applicants": "Applicants info not listed",
-            "remote_filter": "Remote",
-            "job_description": "About FullStack FullStack is one of the fastest-growing software consultancy companies in the Americas. We deliver transformational digital solutions to top global companies and Silicon Valley startups. As an employee-first company, we focus on hiring the most talented candidates by creating a positive, respectful, and supportive work environment where they can achieve their greatest potential. We’re Most Proud Of Offering life-changing career opportunities to talented software professionals across the Americas. Building highly-skilled software development teams for hundreds of the world’s greatest companies. Having delivered hundreds of successful custom software solutions, which have positively impacted the lives and careers of millions of users. Our 4.2-star rating on GlassDoor. Our client Net Promoter Score of 68, twice the industry average. The position FullStack is currently seeking a highly motivated and experienced Accountant to join our team. As the Accountant, you will play a pivotal role in maintaining accurate financial records and ensuring adherence to accounting principles, helping to drive the company’s continued success. What You Will Do General Accounting: Maintain the financial books for FullStack’s Colombian entity. Prepare and enter journal entries on an accrual basis and in accordance with Colombian GAAP Maintain the general ledger, ensuring compliance with accounting policies, procedures, and relevant regulations. Close the accounting books each month. Conduct periodic reconciliations of all accounts to ensure accuracy. Financial Reporting: Assist the Accounting Manager in reporting final monthly results to the US headquarters for consolidation. Prepare financial reports for management reviews. Provide insights and analysis on financial performance. Tax Compliance: Contribute to local and federal tax compliance and tax returns. Audit Management: Contribute to the annual audits, preparing inputs to audit queries. Control Environment Enhancement: Carry out recurring controls and contribute to process improvements and automation within the finance department. Implement best practices to enhance efficiency and accuracy. What We're Looking For 4+ years of professional accounting experience, ideally within the software consultancy, IT services, or professional services industries. Advanced English is required. Successful completion of a four-year college degree is required in Accounting, Finance, or a related field. A Certified Accountant designation is preferred. Experience with transfer pricing, foreign currency management, and other financial matters that arise from foreign subsidiaries Familiarity with GAAP accounting principles and practices. Strong analytical and problem-solving skills, with strong attention to detail. Proficiency in financial software and tools, such as Google Sheets, Siigo, QuickBooks, and similar systems. Ability to work in a dynamic environment, prioritize tasks, and meet deadlines. Commitment to maintaining confidentiality and integrity in financial matters. A positive mindset and a can-do attitude. Experience working on Agile / Scrum teams. Meaningful experience working on large, complex systems. Ability to take extreme ownership over your work. Every day is a challenge to ensure you are performing to the expectations you and your team have agreed upon. Ability to identify with the goals of FullStack's clients, and dedicate yourself to delivering on the commitments you and your team make to them. Ability to consistently work 40 hours per week. What We Offer Competitive Salary. Paid Time Off (vacation, sick leave, maternity and paternity leave, holidays). 100% remote work. The ability to work with leading startups and Fortune 500 companies. Health policy with Sura 100% for you and up to 4 primary family members. English Classes. Food card. Ample opportunity for career advancement. Continuing education opportunities. FullStack is proud to be an equal opportunity workplace. We are committed to equal employment opportunity regardless of race, color, ancestry, religion, sex, national origin, sexual orientation, age, citizenship, marital status, disability, gender identity, or Veteran status. Learn more about our Applicants Privacy Notice. Show more Show less",
-        },
-    ]
-}
+import pytesseract
+import os
+import json
+import psycopg2
+from PIL import Image
+from fastapi import APIRouter, File, UploadFile, HTTPException, Request, status
+import google.generativeai as genai
+from psycopg2 import Error as Psycopg2Error
+from dotenv import load_dotenv
+from io import BytesIO
+
+from utils import get_current_user, insert_into_knowledge_base
+import random
+
+
+import uuid
+
+resume_handling = APIRouter()
+
+
+load_dotenv()  # this calls all the variables in the .env file
+
+# Configure the API key
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+# Create the model
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+
+@resume_handling.post("/upload")
+async def load_image_from(request: Request, uploaded_file: UploadFile = File(...)):
+    print(f"uploaded filename: {uploaded_file.filename}")
+    print(f" content type : {uploaded_file.content_type}")
+    allowed_file_types = ["image/png", "image/jpeg", "image/jpg", "image/pdf"]
+    if uploaded_file.content_type not in allowed_file_types:
+        raise HTTPException(
+            status_code=400,
+            detail="invalid file type. please give the input in the requested file type",
+        )
+    try:
+        contents = await uploaded_file.read()  # this reads the whole file
+        if not contents:
+            raise HTTPException(status_code=400, detail="empty file uploaded")
+        image = Image.open(BytesIO(contents))
+        image.load()  # this loads the image after it is completely opened
+
+        text = pytesseract.image_to_string(image)
+        data = {"text": text}
+        raw_text = json.dumps(data)
+        print(raw_text)
+
+        # to insert the raw_text into the knowledge base
+        # to get the current user
+        current_user = get_current_user(request)
+        current_user_id = current_user["id"]
+        print("till this is ok")
+        # to insert into the knowledge_base
+        try:
+            insert_into_knowledge_base(raw_text, current_user_id)
+
+        except Psycopg2Error as db_error:
+            # this is for all the db related errors
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f" databse error:{str(db_error)}",
+            )
+        except Exception as e:
+            # this is for any other exception which is unexpected
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"there is some error inserting the reusme:{str(e)}",
+            )
+
+        # this prompt gets all of the resume and evalueates the user
+        prompt = f"""
+        You are a highly skilled technical evaluator and career assessment expert. The candidate's target role is **Junior Python Backend Developer**.
+
+**TASK:** Analyze the candidate's resume (provided elsewhere) and generate a tailored quiz preparation plan.
+
+**INSTRUCTIONS:**
+1.  **Analyze Strengths & Projects:** Identify depth areas (Python frameworks, AI integration, Docker, MongoDB).
+2.  **Evaluate Readiness:** Assess alignment with modern production standards (e.g., CI/CD, robust security, relational databases).
+3.  **Determine Gaps:** Identify skills lacking depth for a production-ready Backend Developer (e.g., SQL, Cloud, Testing).
+4.  **Tailor Quiz:** Select **Intermediate** level topics that bridge these gaps. Only include topics not already deeply mastered by the candidate.
+5.  **quiz level** do not forget giving the quiz results in the response as it is very important 
+
+**CRITICAL FORMAT ENFORCEMENT:**
+Your entire response **MUST** strictly adhere to the JSON format provided below. **DO NOT** add any introductory text, concluding commentary, markdown formatting (like ```json), or any text outside of the JSON structure itself.
+
+{{
+"strong_suits": ["<list all strong technical skills and tools>", "..."],
+"projects": ["<list all key projects>", "..."],
+"industry_readiness": "<short assessment, typically 2-3 sentences>",
+"assessment_areas": ["<list all high-level areas to test>", "..."],
+"final_quiz_topics": ["<list the specific, intermediate-level topics to be tested>", "..."],
+"quiz_level": "intermediate",
+"reasoning": "<clear justification for the selected topics, level, and how they bridge the candidate's skill gaps>"
+}}
+        """
+        response = model.generate_content(prompt)
+        analysis_text = response.text
+
+        return {
+            "message": " the raw text has been added into the knowledge_base",
+            "analysis": analysis_text,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"image processing failed: {str(e)}",  # to conver the (error) into a string before it is printed
+        )
