@@ -51,6 +51,6 @@ if __name__ == "__main__":
 
 #  Register the routers
 app.include_router(auth.auth_router, prefix="/auth")
-app.include_router(resume.resume_handling, prefix="/resume")
-# app.include_router(questions.questions_router, prefix="/questions")
+app.include_router(resume.resume_routes, prefix="/resume")
+app.include_router(questions.questions_routes, prefix="/questions")
 app.include_router(rag.rag_router, prefix="/rag")
