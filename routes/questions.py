@@ -1,13 +1,13 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
+from utils import get_data_from_knowledge_base, get_current_user, get_data_from_users
 
-
-"""
-what i have to do in this file:
-1) take all the data of the resume ananlysis 
-2) take the input of the user and then according to what the user wants and what the user skills are make a quiz
-"""
-# initiallising the api router in this file
 questions_routes = APIRouter()
 
-# to take the input of the analysis
 
+@questions_routes.get("/Get_data_from_kb")
+def Get_data_from_kb(request: Request):
+    print("the data of the current user is:")
+    current_usr_id = get_current_user(request)
+    print(current_usr_id)
+    data = get_data_from_users(current_usr_id["id"])
+    return data

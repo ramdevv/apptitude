@@ -1,6 +1,7 @@
 import pytesseract
 import os
 import json
+import re
 import psycopg2
 from PIL import Image
 from fastapi import APIRouter, File, UploadFile, HTTPException, Request, status
@@ -8,13 +9,19 @@ import google.generativeai as genai
 from psycopg2 import Error as Psycopg2Error
 from dotenv import load_dotenv
 from io import BytesIO
-from pdf2image import convert_from_bytes  # <-- Added for PDFs
+from pdf2image import convert_from_bytes
 
-from utils import get_current_user, insert_into_knowledge_base
+from utils import (
+    get_current_user,
+    insert_into_knowledge_base,
+    insert_json_into_users,
+    get_data_from_users,
+)
+
 
 import uuid
 
-resume_handling = APIRouter()
+resume_routes = APIRouter()
 
 load_dotenv()
 
@@ -22,7 +29,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 
-@resume_handling.post("/upload")
+@resume_routes.post("/upload")
 async def load_image_from(request: Request, uploaded_file: UploadFile = File(...)):
     print(f"uploaded filename: {uploaded_file.filename}")
     print(f"content type : {uploaded_file.content_type}")
@@ -113,6 +120,10 @@ async def load_image_from(request: Request, uploaded_file: UploadFile = File(...
 
         response = model.generate_content(prompt)
         analysis_text = response.text
+        # clean the text before sending it through the function
+
+        # to insert the json into the users
+        insert_json_into_users(analysis_text, current_user_id)
 
         return {
             "message": "Resume processed and added into the knowledge base successfully.",

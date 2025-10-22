@@ -2,7 +2,9 @@
 from db import connection, vector_connection
 from fastapi import Request, Depends, HTTPException
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
 import json
+import re
 import os
 import jwt
 import inspect
@@ -13,6 +15,16 @@ from models import (
 
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
+
+
+class user_id_Class(BaseModel):
+    user_id: int = Field(..., description="this calss only takes an integer")
+
+
+class RegUserClass(BaseModel):
+    name: str
+    email: str
+    hashed_password: str
 
 
 def get_hashed_password(email: str):
@@ -89,33 +101,17 @@ def find_path(name_of_file: str):
 """
 
 
-def register_user(name: str, email: str, hashed_password: str):
+def register_user(user_att: RegUserClass):
     with connection.cursor() as cur:  # this will get us the acess to the db
         cur.execute(
             """ INSERT INTO users(name, email, hashed_password) VALUES(%s, %s, %s) RETURNING id;""",
-            (name, email, hashed_password),
+            (user_att.name, user_att.email, user_att.hashed_password),
         )
         connection.commit()  # commit needs to save the inserted values
         return cur.fetchone()
 
 
 # function to write to fill all the content of the knowledge base base for the user
-
-
-def insert_into_knowledge_base(raw_text: str, user_id: int):
-    with connection.cursor() as cur:
-        try:
-            cur.execute(
-                "INSERT INTO knowledge_base (data, user_id) VALUES (%s, %s)",
-                (raw_text, user_id),
-            )
-            connection.commit()
-            print("the data is inserted into the databse")
-        except Exception as e:
-            connection.rollback()  # this is done to fix the error " the current transaction is aborted"
-            raise Exception(
-                f"there is an error inserting the error in the knowledge_base: {e}"
-            )
 
 
 def get_current_user(request: Request):
@@ -142,3 +138,65 @@ def get_data_from_knowledge_base(user_id: int):
             return [row[0] for row in rows]  # extract only the 'data' values
         except Exception as e:
             raise Exception(f"error fetching the data from the knowledge_base: {e}")
+
+
+def insert_into_knowledge_base(raw_text: str, user_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                "INSERT INTO knowledge_base (data, user_id) VALUES (%s, %s)",
+                (raw_text, user_id),
+            )
+            connection.commit()
+            print("the data is inserted into the knowledge_base")
+        except Exception as e:
+            connection.rollback()  # this is done to fix the error " the current transaction is aborted"
+            raise Exception(
+                f"there is an error inserting the error in the knowledge_base: {e}"
+            )
+
+
+import json
+import re
+from fastapi import HTTPException
+
+
+def insert_json_into_users(json_data: dict, user_id: int):
+    with connection.cursor() as cur:
+        try:
+            # this will clean Gemini's output
+            cleaned = re.sub(r"```json|```", "", json_data).strip()
+
+            # convert the cleaned string into a Python dict
+            json_python_dict = json.loads(cleaned)
+
+            # convert the dict back to a valid JSON string for insertion
+            cleaned_json = json.dumps(json_python_dict)
+
+            cur.execute(
+                "UPDATE users SET resume_analysis = %s WHERE id = %s",
+                (cleaned_json, user_id),
+            )
+            connection.commit()
+            print("the analysis is added into the users table")
+            return cleaned_json
+        except Exception as e:
+            connection.rollback()
+            # must specify status_code here; otherwise FastAPI complains
+            raise HTTPException(
+                status_code=500,
+                detail=f"there has been some issue inserting the data in the db: {e}",
+            )
+
+
+def get_data_from_users(user_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute("SELECT resume_analysis FROM users WHERE id = %s;", (user_id,))
+            rows = cur.fetchall()
+            return [row[0] for row in rows]
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"there is an error in fetching the data from the db: {e}",
+            )
