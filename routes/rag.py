@@ -78,9 +78,9 @@ async def save_text(request: Request):
         -> add_documents is the function which converts youre chunks into vectore embeddings 
 
         """
-        ids = vector_stores.add_documents(all_splits)
+        vector_embeddings = vector_stores.add_documents(all_splits)
 
-        return {"message": ids}
+        return {"message": vector_embeddings}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -131,7 +131,7 @@ async def context_chat(request: Request):
 
     pages = [doc.page_content for doc in retrieve_docs]
     docs_content = "\n\n".join(pages)
-    reranked_docs = rerank_docs(question, retrieve_docs)
+    reranked_docs = rerank_docs(question, docs_content)
     raw_context_string = "\n\n".join(doc["text"] for doc in reranked_docs)
     print(raw_context_string)
 

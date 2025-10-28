@@ -2,6 +2,7 @@
 from db import connection, vector_connection
 from fastapi import Request, Depends, HTTPException
 from dotenv import load_dotenv
+from psycopg2.extras import Json
 from pydantic import BaseModel, Field
 import json
 import re
@@ -199,4 +200,24 @@ def get_data_from_users(user_id: int):
             raise HTTPException(
                 status_code=500,
                 detail=f"there is an error in fetching the data from the db: {e}",
+            )
+
+
+def insert_question_data(user_id: int, category: str, questions):
+    with connection.cursor() as cur:
+        try:
+            print("DEBUG types:", type(user_id), type(category), type(questions))
+
+            # psycopg2 will handle JSON serialization automatically
+            cur.execute(
+                "INSERT INTO quiz_questions (user_id, category, questions) VALUES (%s, %s, %s)",
+                (user_id, category, json.dumps(questions)),
+            )
+            connection.commit()
+            print("✅ The data has been added into the db")
+
+        except Exception as err:
+            connection.rollback()
+            raise Exception(
+                f"❌ There was an error inserting the data in the db: {err}"
             )
