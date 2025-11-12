@@ -6,6 +6,8 @@ from utils import (
     insert_question_data,
 )
 from dotenv import load_dotenv
+from pydantic import BaseModel
+from typing import List
 import google.generativeai as genai
 import os
 import json
@@ -17,6 +19,31 @@ questions_routes = APIRouter()
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash")
+
+""" 
+format in which we will be getting the answers from the frontend will be :
+{
+"user_id : 1, 
+answers = [{
+
+"question": " what is youre name ,
+"option": ["shubham", "garv", "karan"],
+"selected" : "shubha" }, 
+
+{and then the list of dicts goes on}]
+}
+"""
+
+
+class Answers_given(BaseModel):
+    question: str
+    options: List[str]
+    selected: str
+
+
+class CheckAnswers(BaseModel):
+    user_id: int
+    answers: List[Answers_given]
 
 
 @questions_routes.get("/Get_data_from_kb")
@@ -123,10 +150,8 @@ async def create_technical(request: Request):
         # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-        print("before inserting")
-        insert_question_data(
-            current_user_id["id"], category="technical", questions=only_questions
-        )
+        print("inserted technical questions")
+        insert_question_data(current_user_id["id"], "technical", only_questions)
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -151,7 +176,7 @@ def create_apptitude(request: Request):
 
     ---
 
-    ### 🎯 Task:
+    ### Task:
     Generate **10 multiple-choice aptitude questions** that assess general intelligence, reasoning, and problem-solving abilities.
 
     The questions must include:
@@ -160,7 +185,7 @@ def create_apptitude(request: Request):
 
     ---
 
-    ### 🧠 Design Rules:
+    ###  Design Rules:
 
     1. **Difficulty Adaptation:**
     - The difficulty must align with the candidate’s `"quiz_level"` (e.g., beginner, intermediate, advanced).
@@ -249,6 +274,7 @@ def create_apptitude(request: Request):
         # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
+        insert_question_data(current_user["id"], "apptitude", only_questions)
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -260,7 +286,9 @@ def create_apptitude(request: Request):
 
 # this route will create the apptitude related questions for the user
 @questions_routes.post("/create_communication")
-def create_communication():
+def create_communication(request: Request):
+
+    current_user = get_current_user(request)
 
     prompt = f"""
     You are an expert psychometric test designer specializing in **professional communication assessment**.
@@ -269,12 +297,12 @@ def create_communication():
 
     ---
 
-    ### 🎯 Core Objective:
+    ### Core Objective:
     Design questions that measure the candidate’s ability to convey, interpret, and adapt communication appropriately across professional scenarios such as meetings, emails, team collaborations, client interactions, and feedback discussions.
 
     ---
 
-    ### 🧠 Skill Areas to Cover (balanced coverage required):
+    ###  Skill Areas to Cover (balanced coverage required):
     1. **Clarity & Conciseness** – Expressing ideas effectively and efficiently.
     2. **Active Listening** – Understanding and recalling information accurately.
     3. **Written Communication** – Grammar, tone, structure, and professionalism in written correspondence.
@@ -304,7 +332,7 @@ def create_communication():
 
     ---
 
-    ### 📄 Output Format:
+    ### Output Format:
     Output **only valid JSON** — no markdown, no commentary, no explanations.
 
     Example:
@@ -347,6 +375,10 @@ def create_communication():
         # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
+        insert_question_data(
+            current_user["id"],
+            "communication",
+        )
     except Exception as e:
         raise HTTPException(
             status_code=500,
@@ -354,6 +386,3 @@ def create_communication():
         )
 
     return {"questions": only_questions}
-
-
-# to write the route to create the total score of the quizes

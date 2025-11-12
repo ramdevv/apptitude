@@ -9,6 +9,9 @@ import re
 import os
 import jwt
 import inspect
+import json
+import re
+from fastapi import HTTPException
 
 from models import (
     CreateUser,
@@ -157,11 +160,6 @@ def insert_into_knowledge_base(raw_text: str, user_id: int):
             )
 
 
-import json
-import re
-from fastapi import HTTPException
-
-
 def insert_json_into_users(json_data: dict, user_id: int):
     with connection.cursor() as cur:
         try:
@@ -203,21 +201,93 @@ def get_data_from_users(user_id: int):
             )
 
 
-def insert_question_data(user_id: int, category: str, questions):
+def insert_question_data(user_id: int, category: str, questions: dict | list):
     with connection.cursor() as cur:
         try:
             print("DEBUG types:", type(user_id), type(category), type(questions))
 
-            # psycopg2 will handle JSON serialization automatically
             cur.execute(
                 "INSERT INTO quiz_questions (user_id, category, questions) VALUES (%s, %s, %s)",
                 (user_id, category, json.dumps(questions)),
             )
             connection.commit()
-            print("✅ The data has been added into the db")
+            print(" The data has been added into the db")
 
         except Exception as err:
             connection.rollback()
-            raise Exception(
-                f"❌ There was an error inserting the data in the db: {err}"
+            raise Exception(f"There was an error inserting the data in the db: {err}")
+
+
+def get_user_quiz_answers(user_id=int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                SELECT 
+                    user_quiz_answers.id,
+                    quiz_questions.category,
+                    user_quiz_answers.answers,
+                    user_quiz_answers.score,
+                    user_quiz_answers.submitted_at
+                FROM user_quiz_answers
+                JOIN quiz_questions
+                ON user_quiz_answers.quiz_id = quiz_questions.id
+                WHERE user_quiz_answers.user_id = %s
+                ORDER BY user_quiz_answers.submitted_at DESC
+                LIMIT 1
+                """,
+                (user_id,),
             )
+            rows = cur.fetchall()
+            return [row[0] for row in rows]
+        except Exception as e:
+            raise HTTPException(f" error fetching the quiz answers from the db : {e}")
+
+
+# to write the function to insert the answers into the user_question_answers
+def insert_user_answers(
+    user_id: int, answers: dict | list, score: int, accuracy: float, quiz_id: int
+):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                    INSERT INTO user_quiz_answers (user_id, quiz_id, answers, score, accuracy)
+                    VALUES (%s, %s, %s, %s, %s);
+                    """,
+                (user_id, quiz_id, json.dump(answers), accuracy),
+            )
+            connection.commit()
+            print(" the answers have been added into the databse")
+        except Exception as e:
+            connection.rollback()
+            raise HTTPException(
+                status_code=500, detail=f"there there was some issue inserting the data"
+            )
+
+
+def get_latest_quiz_id(user_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                SELECT id 
+                FROM quiz_questions 
+                WHERE user_id = %s
+                ORDER BY generated_at DESC 
+                LIMIT 1;
+                """,
+                (user_id,),
+            )
+            result = cur.fetchone()
+
+            if result:
+                quiz_id = result[0]
+                print(f"the latest quiz id is this {quiz_id}")
+                return quiz_id
+            else:
+                print(f"No quiz found for user {user_id}")
+                return None
+
+        except Exception as e:
+            raise Exception(f"Error fetching latest quiz_id: {e}")
