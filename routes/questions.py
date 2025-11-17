@@ -4,6 +4,10 @@ from utils import (
     get_current_user,
     get_data_from_users,
     insert_question_data,
+    get_user_quiz_answers,
+    insert_user_answers_without_score,
+    start_new_session,
+    get_latest_session_id,
 )
 from dotenv import load_dotenv
 from pydantic import BaseModel
@@ -375,14 +379,34 @@ def create_communication(request: Request):
         # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-        insert_question_data(
-            current_user["id"],
-            "communication",
-        )
+        current_session_id = get_latest_session_id(current_user["id"])
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-    return {"questions": only_questions}
+    return {"questions": only_questions, "session_id": current_session_id}
+
+
+@questions_routes.post("/submit_quiz")
+async def submit_quiz(request: Request):
+    # to take the answers , parse them and insert into the db
+    data = await request.json()
+    answers = data.get("answers")
+    current_user_id_list = get_current_user(request)
+    current_user_id = current_user_id_list["id"]
+    questions = get_user_quiz_answers(current_user_id)
+    category = questions[0][1]
+    print(category)
+
+    return {"message": "the questions are inserted in the database"}
+
+
+@questions_routes.post("/create_session")
+def create_session(request: Request):
+    current_user_id_dict = get_current_user(request)
+    current_user_id = current_user_id_dict["id"]
+    # create a new quiz_session
+    response = start_new_session(current_user_id)
+    return response
