@@ -1,13 +1,9 @@
 """
-
-what we have to print
-333222111
-332211
-321
-1
+to print the next iteration of the number .
+for example
+given aray: 239572
 """
 
-num = 10
-
-for i in range(num, num):
-    print(i)
+integer_str = input("enter the array that you want to find the next permutation")
+integer = int(integer_str)
+print(integer)
