@@ -214,10 +214,8 @@ def insert_question_data(user_id: int, category: str, questions):
                 (user_id, category, json.dumps(questions)),
             )
             connection.commit()
-            print("✅ The data has been added into the db")
+            print("The data has been added into the db")
 
         except Exception as err:
             connection.rollback()
-            raise Exception(
-                f"❌ There was an error inserting the data in the db: {err}"
-            )
+            raise Exception(f" There was an error inserting the data in the db: {err}")
