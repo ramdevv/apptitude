@@ -5,9 +5,10 @@ from utils import (
     get_data_from_users,
     insert_question_data,
     get_user_quiz_answers,
-    insert_user_answers_without_score,
     start_new_session,
     get_latest_session_id,
+    insert_quiz_questions,
+    insert_user_answers,
 )
 from dotenv import load_dotenv
 from pydantic import BaseModel
@@ -39,15 +40,11 @@ answers = [{
 """
 
 
-class Answers_given(BaseModel):
-    question: str
-    options: List[str]
-    selected: str
-
-
-class CheckAnswers(BaseModel):
+class Answers(BaseModel):
+    session_id: int
+    quiz_id: int
     user_id: int
-    answers: List[Answers_given]
+    answers: dict
 
 
 @questions_routes.get("/Get_data_from_kb")
@@ -59,12 +56,27 @@ def Get_data_from_kb(request: Request):
     return data
 
 
+@questions_routes.post("/create_session")
+def create_session(request: Request):
+    """
+    this function makes an empty quiz session and returns a session id which will be given to insert the
+    questions and then anwers
+    """
+    current_user_id_dict = get_current_user(request)
+    current_user_id = current_user_id_dict["id"]
+    # create a new quiz_session
+    response = start_new_session(current_user_id)
+    return response
+
+
 # this route will create the questions and the answers to it
 @questions_routes.post("/create_technical")
 async def create_technical(request: Request):
     # take the job profile that the user wants
     data = await request.json()
     user_job_porfile = data.get("job_profile", "software engeneer")
+    session_id = data.get("session_id")
+    print(session_id)
     current_user_id = get_current_user(request)
     resume_analysis = get_data_from_users(current_user_id["id"])
     prompt = f"""
@@ -155,19 +167,22 @@ async def create_technical(request: Request):
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
         print("inserted technical questions")
-        insert_question_data(current_user_id["id"], "technical", only_questions)
+        quiz_id = insert_quiz_questions(session_id, "technical", only_questions)
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-    return {"questions": only_questions}
+    return {"questions": only_questions, "quiz_id": quiz_id}
 
 
 # this route will create the apptitude related questions for the user
 @questions_routes.post("/create_apptitude")
-def create_apptitude(request: Request):
+async def create_apptitude(request: Request):
+
+    data = await request.json()
+    session_id = data.get("session_id")
     current_user = get_current_user(request)
     resume_analysis = get_data_from_users(current_user["id"])
 
@@ -278,20 +293,22 @@ def create_apptitude(request: Request):
         # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-        insert_question_data(current_user["id"], "apptitude", only_questions)
+        quiz_id = insert_quiz_questions(session_id, "apptitude", only_questions)
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-    return {"questions": only_questions}
+    return {"questions": only_questions, "quiz_id": quiz_id}
 
 
 # this route will create the apptitude related questions for the user
 @questions_routes.post("/create_communication")
-def create_communication(request: Request):
+async def create_communication(request: Request):
 
+    data = await request.json()
+    session_id = data.get("session_id")
     current_user = get_current_user(request)
 
     prompt = f"""
@@ -379,34 +396,23 @@ def create_communication(request: Request):
         # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-        current_session_id = get_latest_session_id(current_user["id"])
+        quiz_id = insert_quiz_questions(session_id, "communication", only_questions)
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-    return {"questions": only_questions, "session_id": current_session_id}
+    return {"questions": only_questions, "quiz_id": quiz_id}
 
 
-@questions_routes.post("/submit_quiz")
-async def submit_quiz(request: Request):
-    # to take the answers , parse them and insert into the db
-    data = await request.json()
-    answers = data.get("answers")
-    current_user_id_list = get_current_user(request)
-    current_user_id = current_user_id_list["id"]
-    questions = get_user_quiz_answers(current_user_id)
-    category = questions[0][1]
-    print(category)
+@questions_routes.post("/SubmitAnswers")
+async def SubmitAnswers(answers_data: Answers):
 
-    return {"message": "the questions are inserted in the database"}
-
-
-@questions_routes.post("/create_session")
-def create_session(request: Request):
-    current_user_id_dict = get_current_user(request)
-    current_user_id = current_user_id_dict["id"]
-    # create a new quiz_session
-    response = start_new_session(current_user_id)
-    return response
+    answer_id = insert_user_answers(
+        answers_data.session_id,
+        answers_data.quiz_id,
+        answers_data.user_id,
+        answers_data.answers,
+    )
+    return {"answer_id": answer_id}

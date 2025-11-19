@@ -261,29 +261,6 @@ def get_user_quiz_answers(user_id: int):
             raise HTTPException(f" error fetching the quiz answers from the db : {e}")
 
 
-# to write the function to insert the answers into the user_question_answers
-def insert_user_answers_without_score(
-    user_id: int, quiz_id: int, category: str, answers: dict | list
-):
-    with connection.cursor() as cur:
-        try:
-            answers_json = json.dumps(answers)
-            cur.execute(
-                """
-                    INSERT INTO user_quiz_answers (user_id, quiz_id, catagory, answers)
-                    VALUES (%s, %s, %s, %s);
-                    """,
-                (user_id, quiz_id, category, answers_json),
-            )
-            connection.commit()
-            print(" the answers have been added into the databse")
-        except Exception as e:
-            connection.rollback()
-            raise HTTPException(
-                status_code=500, detail=f"there was some issue inserting the data: {e}"
-            )
-
-
 # this will start the new session for with a session_id
 def start_new_session(user_id: int):
     """
@@ -314,7 +291,7 @@ def insert_quiz_questions(session_id: int, category: str, questions: list):
                 """
                 INSERT INTO quiz_questions (session_id, category, questions)
                 VALUES (%s, %s, %s)
-                RETURNING quiz_id;
+                RETURNING id;
             """,
                 (session_id, category, json.dumps(questions)),
             )
@@ -375,4 +352,30 @@ def complete_session(session_id: int):
             connection.rollback()
             raise HTTPException(
                 status_code=500, detail=f"Error completing session: {e}"
+            )
+
+
+def insert_user_answers(session_id: int, quiz_id: int, user_id: int, answers: dict):
+    """
+    Insert the user's answers for a quiz into user_quiz_answers table.
+    """
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                INSERT INTO user_quiz_answers (session_id, quiz_id, user_id, answers)
+                VALUES (%s, %s, %s, %s)
+                RETURNING id;
+                """,
+                (session_id, quiz_id, user_id, json.dumps(answers)),
+            )
+
+            answer_row_id = cur.fetchone()[0]
+            connection.commit()
+            return answer_row_id
+
+        except Exception as e:
+            connection.rollback()
+            raise HTTPException(
+                status_code=500, detail=f"Error inserting user answers: {e}"
             )
