@@ -1,4 +1,7 @@
 .env
+<<<<<<< HEAD
 .env
 frontend/.env
 backend/.env
+=======
+>>>>>>> feature/quiz_collection

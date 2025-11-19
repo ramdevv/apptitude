@@ -9,6 +9,12 @@ import re
 import os
 import jwt
 import inspect
+<<<<<<< HEAD
+=======
+import json
+import re
+from fastapi import HTTPException
+>>>>>>> feature/quiz_collection
 
 from models import (
     CreateUser,
@@ -157,11 +163,14 @@ def insert_into_knowledge_base(raw_text: str, user_id: int):
             )
 
 
+<<<<<<< HEAD
 import json
 import re
 from fastapi import HTTPException
 
 
+=======
+>>>>>>> feature/quiz_collection
 def insert_json_into_users(json_data: dict, user_id: int):
     with connection.cursor() as cur:
         try:
@@ -206,6 +215,7 @@ def get_data_from_users(user_id: int):
 def insert_question_data(user_id: int, category: str, questions):
     with connection.cursor() as cur:
         try:
+<<<<<<< HEAD
             print("DEBUG types:", type(user_id), type(category), type(questions))
 
             # psycopg2 will handle JSON serialization automatically
@@ -219,3 +229,180 @@ def insert_question_data(user_id: int, category: str, questions):
         except Exception as err:
             connection.rollback()
             raise Exception(f" There was an error inserting the data in the db: {err}")
+=======
+            # to check if there is already a quiz going on for that user
+            cur.execute(
+                """
+                SELECT id FROM quiz_questions 
+                WHERE user_id = %s 
+                ORDER BY generated_at DESC 
+                LIMIT 1
+                """,
+                (user_id,),
+            )
+            row = cur.fetchone()
+
+            if row:
+                quiz_id = row[0]
+            else:
+                # No session — create a new quiz entry (new session)
+                cur.execute(
+                    "INSERT INTO quiz_questions (user_id, category, questions) VALUES (%s, %s, %s) RETURNING id",
+                    (user_id, category, json.dumps(questions)),
+                )
+                quiz_id = cur.fetchone()[0]
+
+            connection.commit()
+            print(f"Data inserted for user {user_id} under quiz ID {quiz_id}")
+            return quiz_id
+
+        except Exception as err:
+            connection.rollback()
+            raise Exception(f"Error inserting quiz data: {err}")
+
+
+def get_user_quiz_answers(user_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                SELECT 
+                    user_quiz_answers.id,
+                    quiz_questions.category,
+                    user_quiz_answers.answers,
+                    user_quiz_answers.score,
+                    user_quiz_answers.submitted_at
+                FROM user_quiz_answers
+                JOIN quiz_questions
+                ON user_quiz_answers.quiz_id = quiz_questions.id
+                WHERE user_quiz_answers.user_id = %s
+                ORDER BY user_quiz_answers.submitted_at DESC
+                LIMIT 1
+                """,
+                (user_id,),
+            )
+            rows = cur.fetchall()
+            return rows
+        except Exception as e:
+            raise HTTPException(f" error fetching the quiz answers from the db : {e}")
+
+
+# this will start the new session for with a session_id
+def start_new_session(user_id: int):
+    """
+    this function will start a new session and then return the session_id
+    """
+    with connection.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO quiz_sessions (user_id)
+            VALUES (%s)
+            RETURNING session_id;
+        """,
+            (user_id,),
+        )
+        session_id = cur.fetchone()[0]
+        connection.commit()
+        return session_id
+
+
+def insert_quiz_questions(session_id: int, category: str, questions: list):
+    """
+    this function will insert the questions into the questions table and then return the quiz_id
+    which we will use to insert the answers
+    """
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                INSERT INTO quiz_questions (session_id, category, questions)
+                VALUES (%s, %s, %s)
+                RETURNING id;
+            """,
+                (session_id, category, json.dumps(questions)),
+            )
+
+            quiz_id = cur.fetchone()[0]
+            connection.commit()
+            return quiz_id
+
+        except Exception as e:
+            connection.rollback()
+            raise HTTPException(status_code=500, detail=f"Error creating quiz: {e}")
+
+
+def get_latest_session_id(user_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                SELECT session_id
+                FROM quiz_sessions
+                WHERE user_id = %s
+                ORDER BY started_at DESC
+                LIMIT 1;
+                """,
+                (user_id,),
+            )
+            row = cur.fetchone()
+
+            if row:
+                return row[0]  # session_id
+            else:
+                raise HTTPException(
+                    status_code=404,
+                    detail="No active quiz session found for this user.",
+                )
+
+        except Exception as e:
+            raise HTTPException(
+                status_code=500, detail=f"Error fetching latest session ID: {e}"
+            )
+
+
+def complete_session(session_id: int):
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                UPDATE quiz_sessions
+                SET completed_at = NOW()
+                WHERE session_id = %s;
+            """,
+                (session_id,),
+            )
+
+            connection.commit()
+
+        except Exception as e:
+            connection.rollback()
+            raise HTTPException(
+                status_code=500, detail=f"Error completing session: {e}"
+            )
+
+
+def insert_user_answers(session_id: int, quiz_id: int, user_id: int, answers: dict):
+    """
+    Insert the user's answers for a quiz into user_quiz_answers table.
+    """
+    with connection.cursor() as cur:
+        try:
+            cur.execute(
+                """
+                INSERT INTO user_quiz_answers (session_id, quiz_id, user_id, answers)
+                VALUES (%s, %s, %s, %s)
+                RETURNING id;
+                """,
+                (session_id, quiz_id, user_id, json.dumps(answers)),
+            )
+
+            answer_row_id = cur.fetchone()[0]
+            connection.commit()
+            return answer_row_id
+
+        except Exception as e:
+            connection.rollback()
+            raise HTTPException(
+                status_code=500, detail=f"Error inserting user answers: {e}"
+            )
+>>>>>>> feature/quiz_collection
