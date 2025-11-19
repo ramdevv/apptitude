@@ -3,48 +3,25 @@ from utils import (
     get_data_from_knowledge_base,
     get_current_user,
     get_data_from_users,
-    insert_question_data,
-<<<<<<< HEAD
-)
-from dotenv import load_dotenv
-=======
-    get_user_quiz_answers,
     start_new_session,
     get_latest_session_id,
     insert_quiz_questions,
     insert_user_answers,
 )
+
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import List
->>>>>>> feature/quiz_collection
 import google.generativeai as genai
 import os
 import json
 import re
-
 
 questions_routes = APIRouter()
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash")
-
-<<<<<<< HEAD
-=======
-""" 
-format in which we will be getting the answers from the frontend will be :
-{
-"user_id : 1, 
-answers = [{
-
-"question": " what is youre name ,
-"option": ["shubham", "garv", "karan"],
-"selected" : "shubha" }, 
-
-{and then the list of dicts goes on}]
-}
-"""
 
 
 class Answers(BaseModel):
@@ -53,46 +30,30 @@ class Answers(BaseModel):
     user_id: int
     answers: dict
 
->>>>>>> feature/quiz_collection
 
 @questions_routes.get("/Get_data_from_kb")
 def Get_data_from_kb(request: Request):
-    print("the data of the current user is:")
     current_usr_id = get_current_user(request)
-    print(current_usr_id)
     data = get_data_from_users(current_usr_id["id"])
     return data
 
 
-<<<<<<< HEAD
-=======
 @questions_routes.post("/create_session")
 def create_session(request: Request):
-    """
-    this function makes an empty quiz session and returns a session id which will be given to insert the
-    questions and then anwers
-    """
-    current_user_id_dict = get_current_user(request)
-    current_user_id = current_user_id_dict["id"]
-    # create a new quiz_session
-    response = start_new_session(current_user_id)
-    return response
+    current_user_id = get_current_user(request)["id"]
+    return start_new_session(current_user_id)
 
 
->>>>>>> feature/quiz_collection
-# this route will create the questions and the answers to it
 @questions_routes.post("/create_technical")
 async def create_technical(request: Request):
-    # take the job profile that the user wants
+
     data = await request.json()
-    user_job_porfile = data.get("job_profile", "software engeneer")
-<<<<<<< HEAD
-=======
+    user_job_porfile = data.get("job_profile", "software engineer")
     session_id = data.get("session_id")
-    print(session_id)
->>>>>>> feature/quiz_collection
+
     current_user_id = get_current_user(request)
     resume_analysis = get_data_from_users(current_user_id["id"])
+
     prompt = f"""
     You are an expert technical evaluator and assessment designer.
 
@@ -172,46 +133,32 @@ async def create_technical(request: Request):
     ]
     }}
     """
+
     response = model.generate_content(prompt)
     question_list = response.text
+
     try:
-        # Remove code block formatting if Gemini adds it
         cleaned_json = re.sub(r"^```json\n|\n```$", "", question_list.strip())
-        # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-<<<<<<< HEAD
-        print("before inserting")
-        insert_question_data(
-            current_user_id["id"], category="technical", questions=only_questions
-        )
-=======
-        print("inserted technical questions")
+
         quiz_id = insert_quiz_questions(session_id, "technical", only_questions)
->>>>>>> feature/quiz_collection
+
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-<<<<<<< HEAD
-    return {"questions": only_questions}
-=======
     return {"questions": only_questions, "quiz_id": quiz_id}
->>>>>>> feature/quiz_collection
 
 
-# this route will create the apptitude related questions for the user
 @questions_routes.post("/create_apptitude")
-<<<<<<< HEAD
-def create_apptitude(request: Request):
-=======
 async def create_apptitude(request: Request):
 
     data = await request.json()
     session_id = data.get("session_id")
->>>>>>> feature/quiz_collection
+
     current_user = get_current_user(request)
     resume_analysis = get_data_from_users(current_user["id"])
 
@@ -224,11 +171,10 @@ async def create_apptitude(request: Request):
 
     ---
 
-<<<<<<< HEAD
-    ### 🎯 Task:
-=======
-    ### Task:
->>>>>>> feature/quiz_collection
+
+    ###  Task:
+
+
     Generate **10 multiple-choice aptitude questions** that assess general intelligence, reasoning, and problem-solving abilities.
 
     The questions must include:
@@ -237,11 +183,8 @@ async def create_apptitude(request: Request):
 
     ---
 
-<<<<<<< HEAD
+
     ### 🧠 Design Rules:
-=======
-    ###  Design Rules:
->>>>>>> feature/quiz_collection
 
     1. **Difficulty Adaptation:**
     - The difficulty must align with the candidate’s `"quiz_level"` (e.g., beginner, intermediate, advanced).
@@ -324,40 +267,28 @@ async def create_apptitude(request: Request):
     """
     response = model.generate_content(prompt)
     question_list = response.text
+
     try:
-        # Remove code block formatting if Gemini adds it
         cleaned_json = re.sub(r"^```json\n|\n```$", "", question_list.strip())
-        # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-<<<<<<< HEAD
-=======
+
         quiz_id = insert_quiz_questions(session_id, "apptitude", only_questions)
->>>>>>> feature/quiz_collection
+
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-<<<<<<< HEAD
-    return {"questions": only_questions}
-=======
     return {"questions": only_questions, "quiz_id": quiz_id}
->>>>>>> feature/quiz_collection
 
 
-# this route will create the apptitude related questions for the user
 @questions_routes.post("/create_communication")
-<<<<<<< HEAD
-def create_communication():
-=======
 async def create_communication(request: Request):
 
     data = await request.json()
     session_id = data.get("session_id")
-    current_user = get_current_user(request)
->>>>>>> feature/quiz_collection
 
     prompt = f"""
     You are an expert psychometric test designer specializing in **professional communication assessment**.
@@ -366,20 +297,14 @@ async def create_communication(request: Request):
 
     ---
 
-<<<<<<< HEAD
-    ### 🎯 Core Objective:
-=======
+
     ### Core Objective:
->>>>>>> feature/quiz_collection
     Design questions that measure the candidate’s ability to convey, interpret, and adapt communication appropriately across professional scenarios such as meetings, emails, team collaborations, client interactions, and feedback discussions.
 
     ---
 
-<<<<<<< HEAD
-    ### 🧠 Skill Areas to Cover (balanced coverage required):
-=======
-    ###  Skill Areas to Cover (balanced coverage required):
->>>>>>> feature/quiz_collection
+
+    ## Skill Areas to Cover (balanced coverage required):
     1. **Clarity & Conciseness** – Expressing ideas effectively and efficiently.
     2. **Active Listening** – Understanding and recalling information accurately.
     3. **Written Communication** – Grammar, tone, structure, and professionalism in written correspondence.
@@ -409,11 +334,9 @@ async def create_communication(request: Request):
 
     ---
 
-<<<<<<< HEAD
-    ### 📄 Output Format:
-=======
-    ### Output Format:
->>>>>>> feature/quiz_collection
+    ###  Output Format:
+
+
     Output **only valid JSON** — no markdown, no commentary, no explanations.
 
     Example:
@@ -448,30 +371,23 @@ async def create_communication(request: Request):
 
     Now, using this structure, generate 10 such questions **along with their correct answers**, fully formatted in pure JSON.
     """
+
     response = model.generate_content(prompt)
     question_list = response.text
+
     try:
-        # Remove code block formatting if Gemini adds it
         cleaned_json = re.sub(r"^```json\n|\n```$", "", question_list.strip())
-        # Convert string to a dict
         parsed_json = json.loads(cleaned_json)
         only_questions = parsed_json["questions"]
-<<<<<<< HEAD
-=======
+
         quiz_id = insert_quiz_questions(session_id, "communication", only_questions)
->>>>>>> feature/quiz_collection
+
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Error parsing AI response: {str(e)}\nRaw response: {question_list}",
         )
 
-<<<<<<< HEAD
-    return {"questions": only_questions}
-
-
-# to write the route to create the total score of the quizes
-=======
     return {"questions": only_questions, "quiz_id": quiz_id}
 
 
@@ -484,5 +400,5 @@ async def SubmitAnswers(answers_data: Answers):
         answers_data.user_id,
         answers_data.answers,
     )
+
     return {"answer_id": answer_id}
->>>>>>> feature/quiz_collection
